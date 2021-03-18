@@ -1,14 +1,12 @@
-﻿using GrandPrix.Controller;
-using System;
-
-namespace GrandPrix
+﻿namespace GrandPrix
 {
-    public class Startup
+    using GrandPrix.Controllers;
+
+    class StartUp
     {
-        public static void Main()
+        static void Main()
         {
-            Engine engine = new Engine();
-            engine.Run();
+            Engine.Run();
         }
     }
 }

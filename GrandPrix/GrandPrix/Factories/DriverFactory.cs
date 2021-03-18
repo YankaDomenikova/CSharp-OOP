@@ -1,26 +1,34 @@
-﻿using GrandPrix.Models.Cars;
-using GrandPrix.Models.Drivers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrandPrix.Factories
+﻿namespace GrandPrix.Factories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using GrandPrix.Models.Drivers;
+
     public class DriverFactory
     {
-        public static Driver CreateDriver(List<string> commandArgs, Car car)
+        public Driver CreateDriver(List<string> commandArgs)
         {
-            string driverType = commandArgs[0];
-            switch (driverType)
+            Driver driver = null;
+
+            string type = commandArgs[0];
+            string name = commandArgs[1];
+            int hp = int.Parse(commandArgs[2]);
+            double fuelAmount= double.Parse(commandArgs[3]);
+            string tyreType = commandArgs[4];
+            double tyreHardness = double.Parse(commandArgs[5]);
+
+            switch (type)
             {
                 case "Aggressive":
-                    return new AggressiveDriver(commandArgs[1], car);
+                    driver = new AggressiveDriver()
+                    break;
                 case "Endurance":
-                    return new EnduranceDriver(commandArgs[1], car);
-                default:
-                    throw new ArgumentException();
+                    driver = new EnduranceDriver()
+                    break;
             }
         }
     }

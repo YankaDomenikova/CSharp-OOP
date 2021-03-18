@@ -1,15 +1,18 @@
-﻿using GrandPrix.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrandPrix.Models.Cars
+﻿namespace GrandPrix.Models.Cars
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using GrandPrix.Models.Tyres;
+
     public class Car
     {
-        private const double MaxTankCapacity = 160.0;
+        private const double FUEL_TANK_MAXIMUM_CAPACITY = 160.0;
+
+        private const string OUT_OF_FUEL_ERROR = "Out of fuel";
 
         private int hp;
         private double fuelAmount;
@@ -22,25 +25,32 @@ namespace GrandPrix.Models.Cars
             this.Tyre = tyre;
         }
 
-        public Tyre Tyre
+        public int Hp 
         {
-            get { return this.tyre; }
-            private set { this.tyre = value; }
+            get
+            {
+                return this.hp;
+            }
+            set
+            {
+                this.hp = value;
+            }
         }
-
         public double FuelAmount
         {
-            get { return this.fuelAmount; }
-            private set
+            get
             {
-                if (value < 0)
+                return this.fuelAmount;
+            }
+            set
+            {
+                if(value < 0)
                 {
-                    throw new ArgumentException(ErrorMessage.OutOfFuel);
+                    throw new AccessViolationException(OUT_OF_FUEL_ERROR);
                 }
-
-                if (value > MaxTankCapacity)
+                if(value > FUEL_TANK_MAXIMUM_CAPACITY)
                 {
-                    this.fuelAmount = MaxTankCapacity;
+                    value = FUEL_TANK_MAXIMUM_CAPACITY;
                 }
                 else
                 {
@@ -48,26 +58,16 @@ namespace GrandPrix.Models.Cars
                 }
             }
         }
-
-        public int Hp
+        public Tyre Tyre
         {
-            get { return this.hp; }
-            private set { this.hp = value; }
-        }
-
-        public void Refuel(double liters)
-        {
-            this.FuelAmount += liters;
-        }
-
-        public void ChangeTyres(Tyre newTyre)
-        {
-            this.Tyre = newTyre;
-        }
-
-        public void ReduceFuel(int length, double fuelConsumptionPerKm)
-        {
-            this.FuelAmount -= length * fuelConsumptionPerKm;
+            get
+            {
+                return this.tyre;
+            }
+            set
+            {
+                this.tyre = value;
+            }
         }
     }
 }

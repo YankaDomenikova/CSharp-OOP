@@ -1,26 +1,18 @@
-﻿using GrandPrix.Models.Tyres;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrandPrix.Factories
+﻿namespace GrandPrix.Factories
 {
-    public class TyreFactory
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using GrandPrix.Models.Tyres;
+
+    class TyreFactory
     {
-        public static Tyre CreateTyre(List<string> commandArgs)
+        public Tyre CreateTyrer(List<string> commandArgs)
         {
-            string tyreType = commandArgs[0];
-            switch (tyreType)
-            {
-                case "Hard":
-                    return new HardTyre(double.Parse(commandArgs[1]));
-                case "Ultrasoft":
-                    return new UltrasoftTyre(double.Parse(commandArgs[1]), double.Parse(commandArgs[2]));
-                default:
-                    throw new ArgumentException();
-            }
+            
         }
     }
 }
